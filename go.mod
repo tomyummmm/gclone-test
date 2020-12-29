@@ -1,4 +1,4 @@
-module github.com/donwa/gclone
+module github.com/tomyummmm/gclone-test
 
 require (
 	github.com/pkg/errors v0.8.1
@@ -9,4 +9,4 @@ require (
 	google.golang.org/api v0.13.0
 )
 
-go 1.13
+go 1.15
