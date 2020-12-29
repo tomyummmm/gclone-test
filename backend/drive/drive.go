@@ -1122,7 +1122,7 @@ func NewFs(name, path string, m configmap.Mapper) (fs.Fs, error) {
 			}
 			path = path[idIndex+1:]
 			fmt.Println("path: ", path)
-			fmt.Println("opt.RootFolderID: ", f.opt.RootFolderID)
+			fmt.Println("opt.RootFolderID: ", opt.RootFolderID)
 		}
 	}
 
