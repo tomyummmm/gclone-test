@@ -699,6 +699,7 @@ func (f *Fs) shouldRetry(err error) (bool, error) {
 // Replace f.svc function
 func (f *Fs) changeSvc(){
 	opt := &f.opt;
+	ctx := context.Background()
 	// 获取sa文件列表
 	// Obtain list of SA
 	if(opt.ServiceAccountFilePath != "" && len(f.ServiceAccountFiles) == 0){
@@ -742,7 +743,7 @@ func (f *Fs) changeSvc(){
 	// Create client and svc
 	loadedCreds, _ := ioutil.ReadFile(env.ShellExpand(opt.ServiceAccountFile))
 	opt.ServiceAccountCredentials = string(loadedCreds)
-	oAuthClient, err := getServiceAccountClient(opt, []byte(opt.ServiceAccountCredentials))
+	oAuthClient, err := getServiceAccountClient(ctx, opt, []byte(opt.ServiceAccountCredentials))
 	if err != nil {
 		errors.Wrap(err, "failed to create oauth client from service account")
 	}

@@ -9,12 +9,10 @@ import (
 	_ "github.com/rclone/rclone/backend/box"
 	_ "github.com/rclone/rclone/backend/cache"
 	_ "github.com/rclone/rclone/backend/chunker"
-	_ "github.com/rclone/rclone/backend/compress"
 	_ "github.com/rclone/rclone/backend/crypt"
 	_ "github.com/tomyummmm/gclone-test/backend/drive"
 	_ "github.com/rclone/rclone/backend/dropbox"
 	_ "github.com/rclone/rclone/backend/fichier"
-	_ "github.com/rclone/rclone/backend/filefabric"
 	_ "github.com/rclone/rclone/backend/ftp"
 	_ "github.com/rclone/rclone/backend/googlecloudstorage"
 	_ "github.com/rclone/rclone/backend/googlephotos"
@@ -42,5 +40,4 @@ import (
 	_ "github.com/rclone/rclone/backend/union"
 	_ "github.com/rclone/rclone/backend/webdav"
 	_ "github.com/rclone/rclone/backend/yandex"
-	_ "github.com/rclone/rclone/backend/zoho"
 )
