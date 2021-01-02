@@ -1,11 +1,12 @@
 @echo off
-title Gclone-test is the best, batch file edited by Tomyummmm, original by RoshanConnor Yo yo (https://telegra.ph/Gclone-test-Guide-for-Windows-07-20)
+title gclone-mod-1.53.3 is the best, batch file edited by Tomyummmm, original by RoshanConnor Yo yo
 
 color 0b
 echo Hey Sexy! Wanna clone some TBs?
+echo This version uses gclone-mod-1.53.3, updated and maintained by me (Tomyummmm) here: https://github.com/tomyummmm/gclone
 echo ----------------------------------------------------------------------------------------------------------------------
 echo Configured Team Drives
-gclone-test listremotes
+gclone-mod-1.53.3 listremotes
 echo ----------------------------------------------------------------------------------------------------------------------
 echo off
 
@@ -25,6 +26,7 @@ echo 10) EMPTY TRASH
 echo N) NCDU - Explore a remote with a text based user interface.
 echo M) MD5SUM - Produces an md5sum file for all the objects in the path.
 echo C) CONFIG - Enter an interactive configuration session.
+echo A) ADVANCED - For experienced users only, command line.
 echo Q) EXIT
 echo.
 set /P option="Choose your Mode: "
@@ -41,6 +43,7 @@ if %option% == 10 (goto empt)
 if /I %option% == N (goto ncdu)
 if /I %option% == M (goto md5)
 if /I %option% == C (goto config)
+if /I %option% == A (goto adv)
 if /I %option% == Q (EXIT)
 echo Invalid input!
 goto menu
@@ -52,7 +55,7 @@ echo.
 set /P src="[Enter Source Folder / TeamDrive] "
 echo ----------------------------------------------------------------------------------------------------------------------
 set /P dst="[Enter Destination Folder / TeamDrive] "
-gclone-test copy %src% %dst% --transfers 10 --tpslimit-burst 50 --checkers 10 -vP --stats-one-line --stats=10s --ignore-existing --drive-server-side-across-configs --drive-chunk-size 128M --drive-acknowledge-abuse --drive-keep-revision-forever --fast-list
+gclone-mod-1.53.3 copy %src% %dst% --transfers 50 --tpslimit-burst 50 --checkers 10 -vP --stats-one-line --stats=10s --ignore-existing --drive-server-side-across-configs --drive-chunk-size 128M --drive-acknowledge-abuse --drive-keep-revision-forever --fast-list
 echo.
 pause
 goto menu
@@ -64,7 +67,7 @@ echo.
 set /P src="[Enter Source Folder / TeamDrive] "
 echo ----------------------------------------------------------------------------------------------------------------------
 set /P dst="[Enter Destination Folder / TeamDrive] "
-gclone-test move %src% %dst% --transfers 50 --tpslimit-burst 50 --checkers 10 -vP --stats-one-line --stats=10s --ignore-existing --drive-server-side-across-configs --drive-chunk-size 128M --drive-acknowledge-abuse --drive-keep-revision-forever --fast-list
+gclone-mod-1.53.3 move %src% %dst% --transfers 50 --tpslimit-burst 50 --checkers 10 -vP --stats-one-line --stats=10s --ignore-existing --drive-server-side-across-configs --drive-chunk-size 128M --drive-acknowledge-abuse --drive-keep-revision-forever --fast-list
 echo.
 pause
 goto menu
@@ -75,7 +78,7 @@ echo.
 set /P src="[Enter Source Folder / TeamDrive] "
 echo ----------------------------------------------------------------------------------------------------------------------
 set /P dst="[Enter Destination Folder / TeamDrive] "
-gclone-test sync %src% %dst% --transfers 50 --tpslimit-burst 50 --checkers 10 -vP --stats-one-line --stats=10s --drive-server-side-across-configs --drive-chunk-size 128M --drive-acknowledge-abuse --drive-keep-revision-forever --fast-list
+gclone-mod-1.53.3 sync %src% %dst% --transfers 50 --tpslimit-burst 50 --checkers 10 -vP --stats-one-line --stats=10s --drive-server-side-across-configs --drive-chunk-size 128M --drive-acknowledge-abuse --drive-keep-revision-forever --fast-list
 echo.
 pause
 goto menu
@@ -91,9 +94,9 @@ set /P checktype="Type of Check? "
 set /P src="[Enter Source Folder / TeamDrive] "
 echo ----------------------------------------------------------------------------------------------------------------------
 set /P dst="[Enter Destination Folder / TeamDrive] "
-if %checktype% == 1 (gclone-test check %src% %dst% -P --drive-server-side-across-configs --fast-list --size-only)
-if %checktype% == 2 (gclone-test check %src% %dst% -P --drive-server-side-across-configs --fast-list)
-if %checktype% == 3 (gclone-test check %src% %dst% -P --drive-server-side-across-configs --fast-list --download)
+if %checktype% == 1 (gclone-mod-1.53.3 check %src% %dst% -P --drive-server-side-across-configs --fast-list --size-only)
+if %checktype% == 2 (gclone-mod-1.53.3 check %src% %dst% -P --drive-server-side-across-configs --fast-list)
+if %checktype% == 3 (gclone-mod-1.53.3 check %src% %dst% -P --drive-server-side-across-configs --fast-list --download)
 echo.
 pause
 goto menu
@@ -102,7 +105,7 @@ goto menu
 :size
 echo.
 set /P src="[Enter Folder / TeamDrive] "
-gclone-test size %src% --fast-list
+gclone-mod-1.53.3 size %src% --fast-list
 echo.
 pause
 goto menu
@@ -110,24 +113,29 @@ goto menu
 
 :list
 echo.
+echo ----------------------------------------------------------------------------------------------------------------------
+echo Configured Team Drives
+gclone-mod-1.53.3 listremotes
+echo ----------------------------------------------------------------------------------------------------------------------
+echo.
 echo 1) ls           List the objects in the path with size and path.
 echo 2) lsd          List all directories/containers/buckets in the path.
 echo 3) lsf          List directories and objects in remote:path formatted for parsing
 echo 4) lsjson       List directories and objects in the path in JSON format.
 echo 5) lsl          List the objects in path with modification time, size and path.
 echo 6) tree         List the contents of the remote in a tree like fashion.
-echo 7) listremotes  List all the remotes in the config file.
+echo Q) Return to menu
 echo.
 set /P listtype="Type of List? "
+if /I %listtype% == Q (goto menu)
 set /P remote="[Enter Folder / TeamDrive] "
 echo.
-if %listtype% == 1 (gclone-test ls %remote%)
-if %listtype% == 2 (gclone-test lsd %remote%)
-if %listtype% == 3 (gclone-test lsf %remote%)
-if %listtype% == 4 (gclone-test lsjson %remote%)
-if %listtype% == 5 (gclone-test lsl %remote%)
-if %listtype% == 6 (gclone-test tree %remote%)
-if %listtype% == 7 (gclone-test listremotes)
+if %listtype% == 1 (gclone-mod-1.53.3 ls %remote%)
+if %listtype% == 2 (gclone-mod-1.53.3 lsd %remote%)
+if %listtype% == 3 (gclone-mod-1.53.3 lsf %remote%)
+if %listtype% == 4 (gclone-mod-1.53.3 lsjson %remote%)
+if %listtype% == 5 (gclone-mod-1.53.3 lsl %remote%)
+if %listtype% == 6 (gclone-mod-1.53.3 tree %remote%)
 echo.
 pause
 goto menu
@@ -142,9 +150,9 @@ echo.
 set /P deletetype="Type of Delete? "
 set /P remote="[Enter Folder / TeamDrive] "
 echo.
-if %deletetype% == 1 (gclone-test delete %remote% -vP --stats-one-line --stats=15s --fast-list)
-if %deletetype% == 2 (gclone-test deletefile %remote% -vP --stats-one-line --stats=15s --fast-list)
-if %deletetype% == 3 (gclone-test purge %remote% -vP --stats-one-line --stats=15s --fast-list)
+if %deletetype% == 1 (gclone-mod-1.53.3 delete %remote% -vP --stats-one-line --stats=15s --fast-list)
+if %deletetype% == 2 (gclone-mod-1.53.3 deletefile %remote% -vP --stats-one-line --stats=15s --fast-list)
+if %deletetype% == 3 (gclone-mod-1.53.3 purge %remote% -vP --stats-one-line --stats=15s --fast-list)
 echo.
 pause
 goto menu
@@ -161,7 +169,7 @@ echo.
 
 :drd
 echo ----------------------------------------------------------------------------------------------------------------------
-gclone-test dedupe --dedupe-mode newest %src% -v --dry-run --fast-list
+gclone-mod-1.53.3 dedupe --dedupe-mode newest %src% -v --dry-run --fast-list
 echo ----------------------------------------------------------------------------------------------------------------------
 echo off
 echo.
@@ -175,8 +183,8 @@ echo.
 :nodrd
 echo ----------------------------------------------------------------------------------------------------------------------
 set /P choice="Do you want to PERMANENTLY delete the duplicates? (y - Permanent / n - Send to trash bin) "
-if /I %choice%==y (gclone-test dedupe --dedupe-mode newest %src% -v --drive-use-trash=false --fast-list)
-if /I %choice%==n (gclone-test dedupe --dedupe-mode newest %src% -v --fast-list)
+if /I %choice%==y (gclone-mod-1.53.3 dedupe --dedupe-mode newest %src% -v --drive-use-trash=false --fast-list)
+if /I %choice%==n (gclone-mod-1.53.3 dedupe --dedupe-mode newest %src% -v --fast-list)
 echo.
 pause
 goto menu
@@ -193,7 +201,7 @@ echo.
 
 :drr
 echo ----------------------------------------------------------------------------------------------------------------------
-gclone-test rmdirs %src% -v --fast-list --dry-run
+gclone-mod-1.53.3 rmdirs %src% -v --fast-list --dry-run
 echo ----------------------------------------------------------------------------------------------------------------------
 echo off
 echo.
@@ -206,8 +214,8 @@ echo.
 :nodrr
 echo ----------------------------------------------------------------------------------------------------------------------
 set /P choice=Do you want to PERMANENTLY delete empty folders? (y - Permanent / n - Send to trash bin)
-if /I %choice%==y (gclone-test rmdirs %src% -v --drive-use-trash=false --fast-list)
-if /I %choice%==n (gclone-test rmdirs %src% -v --fast-list)
+if /I %choice%==y (gclone-mod-1.53.3 rmdirs %src% -v --drive-use-trash=false --fast-list)
+if /I %choice%==n (gclone-mod-1.53.3 rmdirs %src% -v --fast-list)
 echo.
 pause
 goto menu
@@ -224,7 +232,7 @@ if /I %choice%==n (goto emptnodr)
 
 :emptdr
 echo ----------------------------------------------------------------------------------------------------------------------
-gclone-test delete %src% -vP --drive-trashed-only --drive-use-trash=false --fast-list --dry-run
+gclone-mod-1.53.3 delete %src% -vP --drive-trashed-only --drive-use-trash=false --fast-list --dry-run
 echo ----------------------------------------------------------------------------------------------------------------------
 echo off
 echo.
@@ -235,18 +243,17 @@ if /I %choice%==n (goto menu)
 
 :emptnodr
 set /P choice="Are you sure? (y/n) "
-if /I %choice%==y (gclone-test delete %src% -vP --drive-trashed-only --drive-use-trash=false --fast-list)
+if /I %choice%==y (gclone-mod-1.53.3 delete %src% -vP --drive-trashed-only --drive-use-trash=false --fast-list)
 if /I %choice%==n (goto menu)
 echo.
 pause
 goto menu
 
-
 :ncdu
 echo.
 set /P src="[Enter Folder / TeamDrive] "
 echo ----------------------------------------------------------------------------------------------------------------------
-gclone-test ncdu %src% --fast-list
+gclone-mod-1.53.3 ncdu %src% --fast-list
 echo ----------------------------------------------------------------------------------------------------------------------
 echo.
 goto menu
@@ -257,7 +264,7 @@ echo.
 echo ----------------------------------------------------------------------------------------------------------------------
 set /P remote="[Enter Folder / TeamDrive] "
 echo.
-gclone-test md5sum %remote% --fast-list
+gclone-mod-1.53.3 md5sum %remote% --fast-list
 echo ----------------------------------------------------------------------------------------------------------------------
 echo.
 pause
@@ -267,7 +274,21 @@ goto menu
 :config
 echo.
 echo ----------------------------------------------------------------------------------------------------------------------
-gclone-test config
+gclone-mod-1.53.3 config
 echo ----------------------------------------------------------------------------------------------------------------------
 echo.
 goto menu
+
+:adv
+echo.
+echo ----------------------------------------------------------------------------------------------------------------------
+echo Command line interface for gclone-mod-1.53.3
+echo Enter your commands and flags, gclone-mod-1.53.3 is automatically typed for you. e.g. --help OR ls remote:
+echo Enter Q to return to menu.
+echo.
+set /P choice="Command / flags: "
+if /I %choice% == Q (goto menu)
+echo.
+gclone-mod-1.53.3 %choice%
+echo.
+goto adv
